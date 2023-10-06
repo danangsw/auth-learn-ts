@@ -5,8 +5,10 @@
   "repository": "git@github.com:danangsw/auth-learn-ts.git",
   "author": "danang sukma wantara <danangsukma@gmail.com>",
   "license": "MIT",
-  "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/app.ts"
+   "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "watch": "nodemon -e ts -w src -x src/app.ts",
+    "watch:serve": "nodemon src/app.ts"
   },
   "devDependencies": {
     "@types/config": "^3.3.1",
@@ -14,11 +16,24 @@
     "@types/jsonwebtoken": "^9.0.3",
     "@types/lodash": "^4.14.199",
     "@types/nodemailer": "^6.4.11",
+    "nodemon": "^3.0.1",
     "pino-pretty": "^10.2.3",
-    "ts-node-dev": "^1",
-    "typescript": "^4.5.4"
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.2.2"
   },
   "dependencies": {
-    "express": "^5.0.0-alpha.8"
+    "@typegoose/typegoose": "^11.5.0",
+    "argon2": "^0.31.1",
+    "config": "^3.3.9",
+    "dayjs": "^1.11.10",
+    "dotenv": "^16.3.1",
+    "express": "^5.0.0-alpha.8",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
+    "mongoose": "^7.5.4",
+    "nanoid": "^3.0.0",
+    "nodemailer": "^6.9.5",
+    "pino": "^8.15.6"
   }
 }

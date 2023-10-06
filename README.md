@@ -32,7 +32,7 @@ npx tsc --init
 
 ### Install Dev Dependencies
 
-yarn add typescript@^4.5.4 ts-node-dev@^1 @types/express @types/config pino-pretty @types/nodemailer @types/lodash @types/jsonwebtoken -D
+yarn add typescript ts-node ts-node-dev @types/express @types/config pino-pretty @types/nodemailer @types/lodash @types/jsonwebtoken -D
 
 ### Install express
 
