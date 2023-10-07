@@ -1,4 +1,6 @@
 {
-  "watch": ["app.ts", "src", "*"],
-  "ext": "ts"
+  "watch": ["src", "*"],
+  "ext": "ts, json",
+  "ignore": ["spec/**/*.spec.ts"],
+  "exec": "ts-node index.ts"
 }

@@ -1,1 +1,3 @@
-console.log('GO!');
+import { appStart } from './src/app';
+
+appStart();
