@@ -2,15 +2,14 @@ import express from 'express';
 import config from 'config';
 import { connectToDB } from './utils/connection';
 import { logInfo } from './utils/logger';
+import router from './routes';
 
 require('dotenv').config();
 
 const app = express();
 const port = config.get('port');
 
-app.get('/',async (req, res) => {
-    res.send('<h1>Sugeh rawuh!</h1>')
-});
+app.use(router);
 
 export function appStart () { 
     app.listen(port, () => {
