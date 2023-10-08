@@ -11,8 +11,8 @@ import { nanoid } from "nanoid";
 import { logError } from "../utils/logger";
 
 @pre<User>("save", async function(next) {
-    if (!this.isModified("pasword")) { 
-        return;
+    if (!this.isModified("password")) { 
+        return next();
     }
     const hash = await argon2.hash(this.password);
     this.password = hash;

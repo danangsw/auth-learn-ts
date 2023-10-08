@@ -13,8 +13,8 @@ router.use(auth);
 
 router.get('/healthcheck', async (_, res) => res.sendStatus(200));
 router.get('/hello', async (_, res) => {
-    res.sendStatus(200);
     res.send('<h1>Sugeh rawuh!</h1>');
+    // res.sendStatus(200);
 });
 
 export default router;
