@@ -1,6 +1,7 @@
 import express from 'express';
 import config from 'config';
-import { connectToMonggoDB } from './utils/connection';
+import { connectToDB } from './utils/connection';
+import { logInfo } from './utils/logger';
 
 require('dotenv').config();
 
@@ -13,7 +14,7 @@ app.get('/',async (req, res) => {
 
 export function appStart () { 
     app.listen(port, () => {
-        console.log(`App started at http://localhost:${port}`);
-        connectToMonggoDB(); 
+        logInfo.info(`App started at http://localhost:${port}`);
+        connectToDB(); 
     });
 };

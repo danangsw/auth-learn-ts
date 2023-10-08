@@ -1,24 +1,19 @@
 import mongoose from 'mongoose';
 import config from 'config';
+import { logInfo } from './logger';
 
-async function connectToMonggoDB() { 
+async function connectToDB() { 
     const dbUri = config.get<string>('mongoDbUri');
 
     try {
-        const response = await mongoose.connect(dbUri);
-        if (response) {
-            console.log(`Connected to DB successfully!`);
-        }
-        else { 
-            console.log(`...`);
-        }
+        await mongoose.connect(dbUri);
+        logInfo.info('Connected to DB');
     } catch (error) {
-        console.log(`Connection to DB is failed!`);
-        console.log({error})
+        logInfo.error(`Connection to DB failed: ${error}`);
         process.exit(1);
     }
 }
 
 export {
-    connectToMonggoDB
+    connectToDB
 };
