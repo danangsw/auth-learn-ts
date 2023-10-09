@@ -31,10 +31,10 @@ export class User {
     email: string
 
     @prop({ required: true })
-    firstname: string
+    firstName: string
     
     @prop({ required: true })
-    lastname: string
+    lastName: string
 
     @prop({ required: true })
     password: string
@@ -58,4 +58,6 @@ export class User {
     }
 }
 
-export const UserModel = getModelForClass(User)
+const UserModel = getModelForClass(User);
+
+export default UserModel

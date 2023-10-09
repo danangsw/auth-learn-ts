@@ -7,6 +7,7 @@ export async function createUserHandler(
     req: Request<{}, {}, CreateUserInput>,
     res: Response
 ) { 
+    // console.log("user.controller.createUserHandler:", {body: req.body, query: req.query, params: req.params});
     const body = req.body;
 
     try {
@@ -19,7 +20,7 @@ export async function createUserHandler(
             text: `Verification code ${user.verificationCode}. Id: ${user._id}`,
         });
 
-        return res.send("User successfully created");
+        return res.send({ message: "User successfully created" });
     } catch (e: any) {
         if (e.code === 11000)
             return res.status(409).send("Account already exists");
