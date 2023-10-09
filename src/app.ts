@@ -1,7 +1,7 @@
 import express from 'express';
 import config from 'config';
 import { connectToDB } from './utils/connection';
-import { logInfo } from './utils/logger';
+import { log } from './utils/logger';
 import router from './routes';
 
 require('dotenv').config();
@@ -13,7 +13,7 @@ app.use(router);
 
 export function appStart () { 
     app.listen(port, () => {
-        logInfo.info(`App started at http://localhost:${port}`);
+        log.info(`App started at http://localhost:${port}`);
         connectToDB(); 
     });
 };
