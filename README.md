@@ -40,4 +40,4 @@ yarn add express@5
 
 ### Install Dependencies
 
-yarn add axios mongoose @typegoose/typegoose config argon2 pino dayjs nanoid@^3.0.0 nodemailer lodash jsonwebtoken dotenv
+yarn add axios mongoose @typegoose/typegoose config argon2 pino dayjs nanoid@^3.0.0 nodemailer lodash jsonwebtoken dotenv zod

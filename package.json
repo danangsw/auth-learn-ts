@@ -6,8 +6,7 @@
   "author": "danang sukma wantara <danangsukma@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --watch src --respawn --transpile-only src/app.ts",
-    "watch": "nodemon -e ts -w src -x src/app.ts",
+    "dev": "ts-node-dev --respawn --transpile-only --exit-child --watch src index.ts",
     "dev:watch": "nodemon --legacy-watch"
   },
   "devDependencies": {
@@ -35,6 +34,7 @@
     "mongoose": "^7.5.4",
     "nanoid": "^3.0.0",
     "nodemailer": "^6.9.5",
-    "pino": "^8.15.6"
+    "pino": "^8.15.6",
+    "zod": "^3.22.4"
   }
 }
