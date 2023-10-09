@@ -10,13 +10,13 @@ import argon2 from "argon2";
 import { nanoid } from "nanoid";
 import { log } from "../utils/logger";
 
-@pre<User>("save", async function(next) {
+@pre<User>("save", async function() {
     if (!this.isModified("password")) { 
-        return next();
+        return;
     }
     const hash = await argon2.hash(this.password);
     this.password = hash;
-    next();
+    return;
 })
 @modelOptions({
     schemaOptions: {
@@ -58,4 +58,4 @@ export class User {
     }
 }
 
-const UserModel = getModelForClass(User)
+export const UserModel = getModelForClass(User)
