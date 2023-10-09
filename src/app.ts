@@ -1,7 +1,7 @@
 import express from 'express';
 import config from 'config';
-import { connectToDB } from './utils/connection';
-import { log } from './utils/logger';
+import connectToDB from './utils/connection';
+import log from './utils/logger';
 import router from './routes';
 
 require('dotenv').config();

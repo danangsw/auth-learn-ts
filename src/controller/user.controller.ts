@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { CreateUserInput } from "../schema/user.schema";
 import { createUser } from "../service/user.service";
 import { sendEmail } from "../utils/mailer"
+import { ErrorResponse, SuccessResponse } from '../helper/apiResponse';
+import { AnyExpression } from "mongoose";
 
 export async function createUserHandler(
     req: Request<{}, {}, CreateUserInput>,
@@ -20,11 +22,24 @@ export async function createUserHandler(
             text: `Verification code ${user.verificationCode}. Id: ${user._id}`,
         });
 
-        return res.send({ message: "User successfully created" });
+        const Ok: SuccessResponse<any> = {
+            data: {
+                _id: user.id
+            }
+        }
+        return res.status(200).send(Ok);
     } catch (e: any) {
-        if (e.code === 11000)
-            return res.status(409).send("Account already exists");
+        const Err: ErrorResponse = {
+            code: 'CTR11000',
+            error: "Account already exists"
+        }
 
-        return res.status(500).send(e)
+        if (e.code === 11000) { 
+            return res.status(409).send(Err);
+        }
+
+        Err.code = 'CTR500';
+        Err.error = e.errors;
+        return res.status(500).send(Err);
     }
 }

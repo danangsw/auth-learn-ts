@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import config from 'config';
-import { log } from './logger';
+import log from './logger';
 
 async function connectToDB() { 
     const dbUri = config.get<string>('mongoDbUri');
@@ -14,6 +14,4 @@ async function connectToDB() {
     }
 }
 
-export {
-    connectToDB
-};
+export default connectToDB;

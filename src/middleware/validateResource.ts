@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { AnyZodObject } from 'zod';
+import { ErrorResponse } from '../helper/apiResponse';
 
 const validateResource = (schema: AnyZodObject) =>
     (req: Request, res: Response, next: NextFunction) => {
@@ -13,7 +14,11 @@ const validateResource = (schema: AnyZodObject) =>
             // console.log("validateResource", {body: req.body, query: req.query, params: req.params});
             next();
         } catch (e: any) {
-            return res.status(400).send(e.errors)
+            const Err: ErrorResponse = {
+                code: 'VR400',
+                error: e.errors,
+            };
+            return res.status(400).send(Err);
         }
     };
 
