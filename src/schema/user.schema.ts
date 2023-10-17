@@ -26,6 +26,13 @@ export const createUserSchema = object({
     })
 });
 
+export const verifyUserSchema = object({
+    params: object({
+        id: string(),
+        verificationCode: string()
+    }),
+});
+
 /**
  * This schema uses a regular expression (regex) to enforce the following rules:
  * At least one uppercase English letter ((?=.*[A-Z]))
@@ -36,3 +43,4 @@ export const createUserSchema = object({
  */
 
 export type CreateUserInput = TypeOf<typeof createUserSchema>["body"];
+export type VerifyUserInput = TypeOf<typeof verifyUserSchema>["params"];

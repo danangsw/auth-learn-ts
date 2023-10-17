@@ -15,7 +15,7 @@ const validateResource = (schema: AnyZodObject) =>
             next();
         } catch (e: any) {
             const Err: ErrorResponse = {
-                code: 'VR400',
+                code: 'E400',
                 error: e.errors,
             };
             return res.status(400).send(Err);

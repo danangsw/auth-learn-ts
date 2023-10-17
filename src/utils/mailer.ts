@@ -1,6 +1,6 @@
 import nodemailer, { SendMailOptions } from "nodemailer";
 import config from "config";
-import { log } from "./logger";
+import log from "./logger";
 
 /**
  * Hanya digunakan untuk generate fake email smtp server
