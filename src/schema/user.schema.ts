@@ -49,6 +49,28 @@ export const forgotPasswordSchema = object({
     })
 });
 
+export const resetPasswordSchema = object({
+    params: object({
+        id: string(),
+        passwordResetCode: string()
+    }),
+    body: object({
+        password: string({
+            required_error: "Password is required"
+        }).refine((value) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(value),
+            `Password must contain at least one uppercase letter,
+            one lowercase letter, one number, one special character,
+            and be at least 8 characters long without spaces`),
+        passwordConfirmation: string({
+            required_error: "Password confirmation is required"
+        }),
+    }).refine((data) => data.password === data.passwordConfirmation, {
+        message: "Password do not match",
+        path: ["passwordConfirmation"]
+    })
+});
+
 export type CreateUserInput = TypeOf<typeof createUserSchema>["body"];
 export type VerifyUserInput = TypeOf<typeof verifyUserSchema>["params"];
 export type ForgotPasswordInput = TypeOf<typeof forgotPasswordSchema>["body"];
+export type ResetPasswordInput = TypeOf<typeof resetPasswordSchema>;

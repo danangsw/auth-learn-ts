@@ -2,9 +2,9 @@
  * User middleware
  */
 import express from 'express';
-import { createUserSchema, forgotPasswordSchema, verifyUserSchema } from '../schema/user.schema';
+import { createUserSchema, forgotPasswordSchema, resetPasswordSchema, verifyUserSchema } from '../schema/user.schema';
 import validateResource from '../middleware/validateResource'
-import { createUserHandler, forgotPasswordHandler, verifyUserHandler } from '../controller/user.controller';
+import { createUserHandler, forgotPasswordHandler, resetPasswordHandler, verifyUserHandler } from '../controller/user.controller';
 
 const router = express.Router();
 
@@ -20,6 +20,11 @@ router.post('/api/users/verify/:id/:verificationCode',
 router.post(`/api/users/forgotpassword`,
     validateResource(forgotPasswordSchema),
     forgotPasswordHandler
+);
+
+router.post(`/api/users/resetpassword/:id/:passwordResetCode`,
+    validateResource(resetPasswordSchema),
+    resetPasswordHandler
 );
 
 export default router;
