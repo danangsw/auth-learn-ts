@@ -2,6 +2,22 @@
  * Fake email serviceL: https://ethereal.email/
  */
 
+/**
+ * Set this property  of `'logLevel'`to the desired logging level. In order of priority, available levels are:
+ *
+ * - 'fatal'
+ * - 'error'
+ * - 'warn'
+ * - 'info'
+ * - 'debug'
+ * - 'trace'
+ *
+ * The logging level is a __minimum__ level. For instance if `logger.level` is `'info'` then all `'fatal'`, `'error'`, `'warn'`,
+ * and `'info'` logs will be enabled.
+ *
+ * You can pass `'silent'` to disable logging.
+ */
+
 export default {
     port: 3000,
     mongoDbUri: 'mongodb://danang.msi:27017/user-auth-learning',

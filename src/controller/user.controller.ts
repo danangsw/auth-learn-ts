@@ -114,7 +114,7 @@ export async function forgotPasswordHandler(
 
         if (!user) { 
             // Log the error detail in log.debug.
-            log.debug(Err.error);
+            log.warn(Err.error);
             // Return OK, it is for security purpose to hide the registered email from attacker.
             return res.send(Ok);
         }
@@ -140,7 +140,7 @@ export async function forgotPasswordHandler(
             text: `Password reset code ${passResetCode}. Id: ${user._id}`,
         });
 
-        log.debug(`Send password reset code to ${user.email}`)
+        log.warn(`Sent password reset code to '${user.email}'`)
         return res.send(Ok);
     } catch (e) {
         log.error(e, 'Internal server error')
