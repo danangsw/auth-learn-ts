@@ -16,5 +16,6 @@ export default {
             pass: 'jFHkrwVjTNhqRvc5Kq'
         },
         secure: false // true: for production
-    }
+    },
+    emailFrom: 'test@example.com'
 };

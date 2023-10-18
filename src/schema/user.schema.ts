@@ -1,5 +1,13 @@
 import { object, string, TypeOf } from 'zod';
 
+/**
+ * This schema uses a regular expression (regex) to enforce the following rules:
+ * At least one uppercase English letter ((?=.*[A-Z]))
+ * At least one lowercase English letter ((?=.*[a-z]))
+ * At least one digit ((?=.*\d))
+ * At least one special character ((?=.*[@$!%*?&]))
+ * Minimum eight in length without spaces ({8,}$)
+ */
 export const createUserSchema = object({
     body: object({
         firstName: string({
@@ -33,14 +41,14 @@ export const verifyUserSchema = object({
     }),
 });
 
-/**
- * This schema uses a regular expression (regex) to enforce the following rules:
- * At least one uppercase English letter ((?=.*[A-Z]))
- * At least one lowercase English letter ((?=.*[a-z]))
- * At least one digit ((?=.*\d))
- * At least one special character ((?=.*[@$!%*?&]))
- * Minimum eight in length without spaces ({8,}$)
- */
+export const forgotPasswordSchema = object({
+    body: object({
+        email: string({
+            required_error: "Email is required"
+        }).email("Not a valid email")
+    })
+});
 
 export type CreateUserInput = TypeOf<typeof createUserSchema>["body"];
 export type VerifyUserInput = TypeOf<typeof verifyUserSchema>["params"];
+export type ForgotPasswordInput = TypeOf<typeof forgotPasswordSchema>["body"];
