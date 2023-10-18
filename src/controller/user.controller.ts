@@ -59,31 +59,32 @@ export async function verifyUserHandler(
         }
     }
     const Err = {} as ErrorResponse;
+    Err.code = 'E404',
+    Err.error = "Could not verify user."
         
     try {
         // find the user by id
-    const user = await findUserById(id)
+        const user = await findUserById(id)
+        
         if (!user) { 
-        Err.code = 'E404',
-        Err.error = "Could not verify user."
-        return res.status(404).send(Err)
-    }
-    // check to see if they are already verified
-    if (user.verified) { 
-        Err.code = 'E401'
-        Err.error = "User has verified already."
+            return res.status(404).send(Err)
+        }
+        // check to see if they are already verified
+        if (user.verified) { 
+            Err.code = 'E401'
+            Err.error = "User has verified already."
+            return res.status(401).send(Err)
+        }
+        // check to see if the verification is valid
+        if (user.verificationCode === verificationCode) {
+            user.verified = true;
 
-        return res.status(401).send(Err)
-    }
-    // check to see if the verification is valid
-    if (user.verificationCode === verificationCode) {
-        user.verified = true;
-
-        await user.save();
-        Ok.data.id = user.id;
-        return res.status(200).send(Ok)
-    }
-
+            await user.save();
+            
+            Ok.data.id = user.id;
+            return res.status(200).send(Ok)
+        }
+            
         return res.status(404).send(Err)
     } catch (e: any) {
         Err.code = 'E500'
@@ -155,7 +156,7 @@ export async function resetPasswordHandler(
     req: Request<ResetPasswordInput['params'], {}, ResetPasswordInput['body']>,
     res: Response) {
     const { id, passwordResetCode } = req.params;
-    const { password } = req.body;
+    const { email, password } = req.body;
     const Err = {} as ErrorResponse;
     const Ok: SuccessResponse<{id:string}> = {
         data: {
@@ -164,14 +165,17 @@ export async function resetPasswordHandler(
     }
 
     try {
-        const user = findUserById(id);
+        const user = await findUserById(id);
 
         // Validate if user exist, verified and has requested password reset
-        if (!user || !user.verified || user.passwordResetCode !== passwordResetCode) {
+        if (!user ||
+            !user.verified ||
+            (user.passwordResetCode !== passwordResetCode) ||
+            (user.email !== email)) {
             Err.code = 'E400';
             Err.error = `Could not reset the user password.`;
 
-            log.warn(user, `Could not reset the user password.`)
+            log.warn(`Could not reset the user password.`)
             return res.status(400).send(Err);
         }
 
