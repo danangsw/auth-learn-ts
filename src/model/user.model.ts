@@ -60,6 +60,14 @@ export class User {
     }
 }
 
+export const privateFields = [
+    'password',
+    '__v',
+    'verificationCode',
+    'verified',
+    'passwordResetCode'
+]
+
 const UserModel = getModelForClass(User);
 
 export default UserModel

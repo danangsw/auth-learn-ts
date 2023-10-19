@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { CreateUserInput, ForgotPasswordInput, ResetPasswordInput, VerifyUserInput } from "../schema/user.schema";
-import { createUser, findByEmail, findUserById } from "../service/user.service";
+import { createUser, findUserByEmail, findUserById } from "../service/user.service";
 import { sendEmail } from "../utils/mailer"
 import { ErrorResponse, SuccessResponse } from '../helper/apiResponse';
 import log from "../utils/logger";
@@ -108,7 +108,7 @@ export async function forgotPasswordHandler(
     }
 
     try {
-        const user = await findByEmail(email);
+        const user = await findUserByEmail(email);
 
         if (!user) { 
             Err.code = 'E404';

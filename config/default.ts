@@ -22,6 +22,8 @@ export default {
     port: 3000,
     mongoDbUri: 'mongodb://danang.msi:27017/user-auth-learning',
     logLevel: 'info',
+    accessTokenPrivateKey: "",
+    refreshTokenPrivateKey: "",
     // only for development purpose
     // use the real smtp configuration for the production purpose
     smtp: {
@@ -33,5 +35,5 @@ export default {
         },
         secure: false // true: for production
     },
-    emailFrom: 'test@example.com'
+    emailFrom: 'test@example.com',
 };
