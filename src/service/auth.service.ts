@@ -25,3 +25,7 @@ export async function signRefreshToken({ userId }: { userId: string; }) {
 export async function createSession({ userId }: { userId: string; }) { 
     return SessionModel.create({ userId });
 }
+
+export async function findSessionById(id: string) { 
+    return SessionModel.findById(id);
+}
