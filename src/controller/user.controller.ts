@@ -194,3 +194,21 @@ export async function resetPasswordHandler(
         return res.status(500).send(Err);
     }
 }
+
+export async function getCurrentUserHandler(req: Request, res: Response) { 
+    const Err = {
+        code: 'E401',
+        error: 'Invalid User access token'
+    } as ErrorResponse;
+    const Ok: SuccessResponse<{ user: object; }> = {
+        data: {
+            user: res.locals.user
+        }
+    };
+
+    if (!res.locals.user) { 
+        return res.status(401).send(Err)
+    }
+
+    return res.send(Ok);
+}

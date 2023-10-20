@@ -18,8 +18,7 @@ export async function signRefreshToken({ userId }: { userId: string; }) {
         session: session._id
     }, "refreshTokenPrivateKey", { expiresIn: "1y" });
 
-    console.log({ userId }, { session }, { refreshToken });
-
+    // console.log({ userId }, { session }, { refreshToken });
     return refreshToken;
 }
 
