@@ -51,7 +51,7 @@ export async function createSessionHandler(
     }
 }
 
-export async function refreshAccessTokenHandle(req: Request, res: Response) { 
+export async function refreshAccessTokenHandler(req: Request, res: Response) { 
     const Ok: SuccessResponse<{accessToken:string}> = {
         data: {
             accessToken: "_"
@@ -83,6 +83,5 @@ export async function refreshAccessTokenHandle(req: Request, res: Response) {
     }
 
     Ok.data.accessToken =  signAccessToken(user);
-
     return res.send(Ok);
 }
